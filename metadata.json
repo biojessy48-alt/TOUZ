@@ -1,0 +1,6 @@
+{
+  "name": "Maison Élégant",
+  "description": "High-end luxury fashion boutique featuring bespoke apparel collections, interactive product gallery, shopping bag, and seamless checkout experience.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

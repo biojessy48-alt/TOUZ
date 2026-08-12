@@ -132,7 +132,7 @@ export function handleFirestoreError(error: unknown, operationType: OperationTyp
 }
 
 // Helper to timeout long-hanging Firestore requests (e.g. offline/network latency/Safari ITP)
-const fetchWithTimeout = <T>(promise: Promise<T>, timeoutMs = 3500): Promise<T> => {
+const fetchWithTimeout = <T>(promise: Promise<T>, timeoutMs = 8000): Promise<T> => {
   return new Promise<T>((resolve, reject) => {
     const timer = setTimeout(() => {
       reject(new Error('Firestore operation timed out (offline fallback)'));

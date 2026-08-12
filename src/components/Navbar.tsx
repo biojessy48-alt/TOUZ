@@ -106,7 +106,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           isVisible ? 'translate-y-0' : '-translate-y-full'
         } ${
           isTransparent
-            ? 'bg-transparent shadow-none'
+            ? 'bg-gradient-to-b from-black/85 via-black/40 to-transparent shadow-none'
             : 'bg-white/95 backdrop-blur-md shadow-md border-b border-[#000000]/10'
         }`}
       >

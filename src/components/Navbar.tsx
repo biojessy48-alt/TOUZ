@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { User } from 'firebase/auth';
+import { User as FirebaseUser } from 'firebase/auth';
+import { Search, Heart, User, ShoppingBag, X } from 'lucide-react';
 import { ViewMode, StoreSettings } from '../types';
 import { useLanguage } from '../context/LanguageContext';
 import { SocialLinks } from './SocialLinks';
@@ -15,7 +16,7 @@ interface NavbarProps {
   onOpenAccount: () => void;
   onOpenAdmin?: () => void;
   storeSettings?: StoreSettings;
-  user?: User | null;
+  user?: FirebaseUser | null;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -289,41 +290,37 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Search */}
             <button
               onClick={onOpenSearch}
-              className={`w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 flex items-center justify-center rounded-full transition-all cursor-pointer ${
+              className={`w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 flex items-center justify-center shrink-0 rounded-full transition-all cursor-pointer ${
                 isTransparent
                   ? 'text-white hover:bg-white/15 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]'
                   : 'text-[#000000] hover:bg-[#000000]/5'
               }`}
               title={t('nav.search', 'Search')}
             >
-              <span className="material-symbols-outlined text-[22px] md:text-[24px]">
-                search
-              </span>
+              <Search className="w-5 h-5 sm:w-[22px] sm:h-[22px]" />
             </button>
 
             {/* Wishlist */}
             <button
               onClick={onOpenWishlist}
-              className={`w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 flex items-center justify-center rounded-full transition-all cursor-pointer relative ${
+              className={`w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 flex items-center justify-center shrink-0 rounded-full transition-all cursor-pointer relative ${
                 isTransparent
                   ? 'text-white hover:bg-white/15 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]'
                   : 'text-[#000000] hover:bg-[#000000]/5'
               }`}
               title={t('nav.wishlist', 'Saved Items')}
             >
-              <span
-                className={`material-symbols-outlined text-[22px] md:text-[24px] ${
+              <Heart
+                className={`w-5 h-5 sm:w-[22px] sm:h-[22px] transition-colors ${
                   wishlistCount > 0
                     ? isTransparent
-                      ? 'text-red-400'
-                      : 'text-[#ba1a1a]'
+                      ? 'text-red-400 fill-red-400'
+                      : 'text-[#ba1a1a] fill-[#ba1a1a]'
                     : isTransparent
                     ? 'text-white'
                     : 'text-[#000000]'
                 }`}
-              >
-                favorite
-              </span>
+              />
               {wishlistCount > 0 && (
                 <span className="absolute top-0 right-0 bg-[#ba1a1a] text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold shadow-xs">
                   {wishlistCount}
@@ -334,7 +331,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Account */}
             <button
               onClick={onOpenAccount}
-              className={`w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 flex items-center justify-center rounded-full transition-all cursor-pointer relative ${
+              className={`w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 flex items-center justify-center shrink-0 rounded-full transition-all cursor-pointer relative ${
                 isTransparent
                   ? 'text-white hover:bg-white/15 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]'
                   : 'text-[#000000] hover:bg-[#000000]/5'
@@ -351,9 +348,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 />
               ) : (
                 <div className="relative flex items-center justify-center">
-                  <span className="material-symbols-outlined text-[22px] md:text-[24px]">
-                    person
-                  </span>
+                  <User className="w-5 h-5 sm:w-[22px] sm:h-[22px]" />
                   {user && (
                     <span className="absolute bottom-0 right-0 w-2 h-2 bg-[#2e7d32] rounded-full ring-1 ring-white" />
                   )}
@@ -364,16 +359,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Cart */}
             <button
               onClick={onOpenCart}
-              className={`w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 flex items-center justify-center rounded-full transition-all cursor-pointer relative ${
+              className={`w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 flex items-center justify-center shrink-0 rounded-full transition-all cursor-pointer relative ${
                 isTransparent
                   ? 'text-white hover:bg-white/15 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]'
                   : 'text-[#000000] hover:bg-[#000000]/5'
               }`}
               title={t('nav.cart', 'Shopping Bag')}
             >
-              <span className="material-symbols-outlined text-[22px] md:text-[24px]">
-                shopping_bag
-              </span>
+              <ShoppingBag className="w-5 h-5 sm:w-[22px] sm:h-[22px]" />
               {cartCount > 0 && (
                 <span
                   className={`absolute top-0 right-0 text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold ${
@@ -424,7 +417,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     className="p-2 text-white/70 hover:text-[#c5a059] hover:bg-white/5 rounded-full transition-all duration-300 cursor-pointer"
                     aria-label="Close menu"
                   >
-                    <span className="material-symbols-outlined text-[26px]">close</span>
+                    <X className="w-6 h-6" />
                   </button>
                 </div>
 
@@ -509,7 +502,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     }}
                     className="flex items-center justify-center gap-2 py-3 px-3 border border-white/20 hover:border-[#c5a059] text-white/90 hover:text-[#c5a059] transition-all duration-300 font-label-caps text-[11px] sm:text-[12px] tracking-widest cursor-pointer bg-transparent rounded-none"
                   >
-                    <span className="material-symbols-outlined text-[18px] text-[#c5a059]">favorite</span>
+                    <Heart className="w-4 h-4 text-[#c5a059]" />
                     <span>{t('nav.wishlist', 'المفضلة')} ({wishlistCount})</span>
                   </button>
 
@@ -520,7 +513,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     }}
                     className="flex items-center justify-center gap-2 py-3 px-3 border border-white/20 hover:border-[#c5a059] text-white/90 hover:text-[#c5a059] transition-all duration-300 font-label-caps text-[11px] sm:text-[12px] tracking-widest cursor-pointer bg-transparent rounded-none"
                   >
-                    <span className="material-symbols-outlined text-[18px] text-[#c5a059]">person</span>
+                    <User className="w-4 h-4 text-[#c5a059]" />
                     <span>{t('nav.account', 'الحساب')}</span>
                   </button>
                 </div>
